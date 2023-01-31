@@ -3,12 +3,9 @@ title: Spring Boot 3 MongoDB transactions
 date: 2023-01-29 22:12:00 +0400
 author: pakisan
 categories: [Spring Boot, MongoDB]
-tags: [transactions]
+tags: [transactions, mongodb]
+mermaid: true
 ---
-
-# Spring Boot 3 MongoDB transactions
-
-## Long story short:
 
 Transactions won't work without next things:
 - replica set
@@ -33,14 +30,21 @@ That's main reason why newly created Spring Boot project with MongoDB will fail 
 java.lang.IllegalStateException: Failed to retrieve PlatformTransactionManager for @Transactional test:
 ```
 
-## What to do:
+# What to do:
 
-- Configure `MongoTransactionManager`
 - Create replica set
-  - From single node
-  - From multiple nodes
+- Configure `MongoTransactionManager` as `PlatformTransactionManager`
+- Update application properties
+- Fix DataMongoTest tests
 
-## Configure `MongoTransactionManager`
+## Create replica set
+
+Choose preferred way to create replica set:
+- [Docker single node replica set](/posts/docker-mongodb-single-node-replica-set)
+- [Docker multiple node replica set](/posts/docker-mongodb-multiple-node-replica-set)
+- [Docker compose single node replica set](/posts/docker-compose-mongodb-single-node-replica-set/)
+
+## Configure PlatformTransactionManager
 
 Register `MongoTransactionManager` in the application context.
 
@@ -73,94 +77,47 @@ public class MongoClientConfiguration extends AbstractMongoClientConfiguration {
 }
 ```
 
-## Create replica set: from single node
+## Update application properties
 
-### Docker
-
-1. Run MongoDB in docker
-```shell
-docker run -d -p 27017:27017 --name mongodb mongo:6.0.4 mongod --replSet myReplicaSet
-```
-
-2. Initiate replica set
-```shell
-docker exec -it mongodb mongosh --eval "rs.initiate({
- _id: \"myReplicaSet\",
- members: [
-   {_id: 0, host: \"localhost\"}
- ]
-})"
-```
-
-3. Test and verify replica set
-```shell
-docker exec -it mongodb mongosh --eval "rs.status()"
-```
-
-4. Update connection parameters in application properties
 ```properties
-spring.data.mongodb.database=reviews
 spring.data.mongodb.replica-set-name=myReplicaSet
 ```
 
-### Docker compose
+## Fix DataMongoTest tests
 
-1. Create docker compose file:
+Looks like `@DataMongoTest` still not activates autoconfiguration for MongoDB transactions.
 
-```
-version: "3.9"
-networks:
-  mongodb-network:
-    name: "mongodb-network"
-    driver: bridge
-services:
-  mongodb:
-    image: "mongo:6.0.4"
-    container_name: "mongodb"
-    networks:
-      - mongodb-network
-    hostname: "mongodb"
-    ports:
-      - "27017:27017"
-    restart: "always"
-    entrypoint: [ "/usr/bin/mongod", "--bind_ip_all", "--replSet", "myReplicaSet" ]
-  mongoinit:
-    image: "mongo:6.0.4"
-    container_name: "mongodb_replSet_initializer"
-    restart: "no"
-    depends_on:
-      - mongodb
-    networks:
-      - mongodb-network
-    command: >
-      mongosh --host mongodb:27017 --eval "rs.initiate({
-       _id: \"myReplicaSet\",
-       members: [
-         {_id: 0, host: \"mongodb\"}
-       ]
-      })"
+References:
+- [Issue on StackOverflow](https://stackoverflow.com/questions/60178310/spring-data-mongodb-transactional-isnt-working/60184283)
+- [Closed issue on GitHub](https://github.com/spring-projects/spring-boot/issues/20182)
+
+Proposal to import `TransactionAutoConfiguration` didn't help me
+```java
+@ImportAutoConfiguration(TransactionAutoConfiguration.class)
 ```
 
-2. Launch it
+So I decided to replace it with MongoDBConfig import
+```java
+import app.config.MongoDBConfig;
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
+import org.springframework.context.annotation.Import;
+import org.springframework.transaction.annotation.Transactional;
 
-```shell
-docker compose up
+@DataMongoTest
+@Transactional
+@Import(MongoDBConfig.class)
+public class MongoTest {
+
+    @Test
+    public void testTransaction() {
+
+    }
+
+}
 ```
 
-3. Test and verify replica set
-```shell
-docker exec -it mongodb mongosh --eval "rs.status()"
-```
-
-4. Update connection parameters in application properties
-```properties
-spring.data.mongodb.database=reviews
-spring.data.mongodb.replica-set-name=myReplicaSet
-```
-
-## Create replica set: from multiple nodes
-
-## References
+# References
 
 - [Convert a Standalone to a Replica Set](https://www.mongodb.com/docs/manual/tutorial/convert-standalone-to-replica-set/)
 - [Deploying a MongoDB Cluster with Docker](https://www.mongodb.com/compatibility/deploying-a-mongodb-cluster-with-docker)
