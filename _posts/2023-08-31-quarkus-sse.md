@@ -32,18 +32,59 @@ sequenceDiagram
 
 ```json
 {
-  "openapi": "3.0.3",
+  "openapi": "3.1.0",
   "info": {
-    "title": "Title",
-    "description": "Title",
+    "title": "SSE broadcast API",
+    "description": "Quarkus SSE example",
     "version": "1.0.0"
   },
   "servers": [
     {
-      "url": "https"
+      "url": "http://localhost:8080"
     }
   ],
   "paths": {
+    "/messages/broadcast": {
+      "post": {
+        "summary": "Broadcast message",
+        "operationId": "broadcastMessage",
+        "tags": [
+          "messages"
+        ],
+        "requestBody": {
+          "description": "Message to broadcast",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MessageToBroadcast"
+              },
+              "example": "broadcast this message :rocket:"
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "message received"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "MessageToBroadcast": {
+        "type": "object",
+        "required": [
+          "message"
+        ],
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        }
+      }
+    }
   }
 }
 ```
