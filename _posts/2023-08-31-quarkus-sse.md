@@ -30,6 +30,12 @@ sequenceDiagram
 	deactivate App
 ```
 
+## Contracts
+
+### OpenAPI 3 - synchronous request
+
+It's quite easy to describe path which will receive message to broadcast
+
 ```json
 {
   "openapi": "3.1.0",
@@ -88,6 +94,83 @@ sequenceDiagram
   }
 }
 ```
+
+But what about messages streaming? We have to ways - OpenAPI or AsyncAPI specification.
+
+Let's try both of them
+
+### OpenAPI 3 - SSE
+
+```json
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "SSE broadcast API",
+    "description": "Quarkus SSE example",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080"
+    }
+  ],
+  "paths": {
+    "/messages": {
+      "get": {
+        "summary": "Receive messages",
+        "operationId": "receiveMessage",
+        "tags": [
+          "messages"
+        ],
+        "responses": {
+          "200": {
+            "description": "messages",
+            "content": {
+              "text/event-stream": {
+                "schema": {
+                  "$ref": "#/components/schemas/MessagesStream"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "MessagesStream": {
+        "type": "array",
+        "format": "event-stream",
+        "items": {
+          "type": "object",
+          "required": [
+            "message"
+          ],
+          "properties": {
+            "message": {
+              "type": "string",
+              "example": "broadcast this message :rocket:"
+            },
+            "receivedAt": {
+              "type": "string",
+              "format": "date-time",
+              "example": "2023-08-31T15:28:21.283+00:00"
+            }
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+### AsyncAPI - SSE
+
+```json
+
+```
+
 # References
 - [Server-sent events](https://html.spec.whatwg.org/multipage/server-sent-events.html)
 - [Quarkus](https://quarkus.io/)
