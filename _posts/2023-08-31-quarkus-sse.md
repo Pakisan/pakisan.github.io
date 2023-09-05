@@ -7,6 +7,13 @@ tags: [quarkus, sse]
 mermaid: true
 ---
 
+Most interesting moment for me is to compare OpenAPI specification with AsyncAPI specification in case of:
+
+- re-using of common parts
+- describing of SSE application
+
+and compare results
+
 # What will we do
 
 Service which will broadcast received messages through an SSE connection to any subscribed user
@@ -33,13 +40,6 @@ sequenceDiagram
 ```
 
 ## Contracts
-
-Most interesting moment for me is to compare OpenAPI specification with AsyncAPI specification in case of:
-
-- re-using of common parts
-- describing of SSE application
-
-and compare result
 
 ### OpenAPI 3 - synchronous request
 
