@@ -19,18 +19,27 @@ sequenceDiagram
 
 	User->>App: POST /messages/broadcast
 	activate App
-	App--)Sse Emitter: message
+  Note over App,User: POST /sse/broadcast HTTP/1.1<br/>Host: localhost:8080<br/>Content-Type: application/json<br/>Content-Length: 28<br/><br/>{"message": "broadcast this message :rocket:"}
+  App--)Sse Emitter: message
 	App-->>User: 200 OK
 	deactivate App
 
 	User->>App: GET /sse
 	activate App
 	App-->>User: 200 OK
-	Sse Emitter-)User: message
+  Note over App,User: HTTP/1.1 200 OK<br/>Content-Type: text/event-stream<br/>X-SSE-Content-Type: application/json<br/>transfer-encoding: chunked
+  Sse Emitter-)User: message
 	deactivate App
 ```
 
 ## Contracts
+
+Most interesting moment for me is to compare OpenAPI specification with AsyncAPI specification in case of:
+
+- re-using of common parts
+- describing of SSE application
+
+and compare result
 
 ### OpenAPI 3 - synchronous request
 
