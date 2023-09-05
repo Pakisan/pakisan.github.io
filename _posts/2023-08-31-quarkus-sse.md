@@ -168,7 +168,61 @@ Let's try both of them
 ### AsyncAPI - SSE
 
 ```json
-
+{
+  "asyncapi": "2.6.0",
+  "info": {
+    "title": "SSE broadcast API",
+    "description": "Quarkus SSE example",
+    "version": "1.0.0"
+  },
+  "servers": {
+    "dev": {
+      "url": "http://localhost:8080",
+      "protocol": "http"
+    }
+  },
+  "channels": {
+    "/messages": {
+      "description": "Receive messages",
+      "subscribe": {
+        "message": {
+          "$ref": "#/components/messages/Message"
+        },
+        "bindings": {
+          "http": {
+            "type": "request",
+            "method": "GET"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "messages": {
+      "Message": {
+        "payload": {
+          "type": "object",
+          "required": [
+            "message",
+            "receivedAt"
+          ],
+          "properties": {
+            "message": {
+              "type": "string",
+              "example": "broadcast this message :rocket:"
+            },
+            "receivedAt": {
+              "type": "string",
+              "format": "date-time",
+              "example": "2023-08-31T15:28:21.283+00:00"
+            }
+          },
+          "additionalProperties": false
+        }
+      }
+    }
+  }
+}
 ```
 
 # References
