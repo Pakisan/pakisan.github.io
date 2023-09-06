@@ -546,7 +546,28 @@ We can use this [GitHub issue](https://github.com/OAI/OpenAPI-Specification/issu
 
 ## Resume
 
-TODO
+Both specifications allows to you to describe Pub and Sub for SSE app, but with some tradeoffs
+
+OpenAPI can't offer canonical way how to describe stream.
+
+For example:
+> ```json
+> {
+>   "type": "array",
+>   "format": "event-stream",
+>   "items": {
+>     "$ref": "../schemas.json#/schemas/Message"
+>   }
+> }
+> ```
+
+What does it mean? Stream of messages? Stream of arrays with messages?
+
+From other side AsyncAPI as expected can't offer flexible syntax for description of HTTP requests - headers, params location, status codes
+
+It's up to you to choose which specification to use, but looks like it's better to use them both, instead of reinvent the wheel:
+- [Swagger for Server Sent Events](https://github.com/OAI/OpenAPI-Specification/issues/396)
+- [Swagger for WebSocket services](https://github.com/OAI/OpenAPI-Specification/issues/55#issuecomment-1057220490)
 
 # References
 - [Server-sent events](https://html.spec.whatwg.org/multipage/server-sent-events.html)
