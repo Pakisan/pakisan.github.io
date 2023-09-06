@@ -546,7 +546,7 @@ We can use this [GitHub issue](https://github.com/OAI/OpenAPI-Specification/issu
 
 ## Resume
 
-Both specifications allows to you to describe Pub and Sub for SSE app, but with some tradeoffs
+Both specifications allow to you to describe Pub and Sub for SSE app, but with some tradeoffs
 
 OpenAPI can't offer canonical way how to describe stream.
 
