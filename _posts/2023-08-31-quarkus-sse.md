@@ -29,7 +29,7 @@ sequenceDiagram
   Note over App,User: POST /messages HTTP/1.1<br/>Host: localhost:8080<br/>Content-Type: application/json<br/>Content-Length: 46<br/><br/>{"message": "broadcast this message :rocket:"}
   activate Sse emitter
   App--)Sse emitter: pass message
-  App-->>User:
+  App-->>User: 
   Note over App,User: HTTP/1.1 200 OK
   deactivate App
 
@@ -37,7 +37,7 @@ sequenceDiagram
   Note over App,User: GET /messages HTTP/1.1<br/>Host: localhost:8080
   activate App
   App--)Sse emitter: subscribe
-  App-->>User:
+  App-->>User:  
   Note over App,User: HTTP/1.1 200 OK<br/>Content-Type: text/event-stream<br/>X-SSE-Content-Type: application/json<br/>transfer-encoding: chunked
   Sse emitter-)User: broadcast message
   deactivate App
