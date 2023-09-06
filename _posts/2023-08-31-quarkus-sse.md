@@ -20,23 +20,28 @@ Service which will broadcast received messages through an SSE connection to any 
 
 ```mermaid
 sequenceDiagram
-	actor User
-	participant App
-	participant Sse Emitter
+  actor User
+  participant App
+  participant Sse emitter
 
-	User->>App: POST /messages/broadcast
-	activate App
-  Note over App,User: POST /sse/broadcast HTTP/1.1<br/>Host: localhost:8080<br/>Content-Type: application/json<br/>Content-Length: 28<br/><br/>{"message": "broadcast this message :rocket:"}
-  App--)Sse Emitter: message
-	App-->>User: 200 OK
-	deactivate App
+  User->>App: Send message
+  activate App
+  Note over App,User: POST /messages HTTP/1.1<br/>Host: localhost:8080<br/>Content-Type: application/json<br/>Content-Length: 46<br/><br/>{"message": "broadcast this message :rocket:"}
+  activate Sse emitter
+  App--)Sse emitter: pass message
+  App-->>User:
+  Note over App,User: HTTP/1.1 200 OK
+  deactivate App
 
-	User->>App: GET /sse
-	activate App
-	App-->>User: 200 OK
+  User->>App: Request stream
+  Note over App,User: GET /messages HTTP/1.1<br/>Host: localhost:8080
+  activate App
+  App--)Sse emitter: subscribe
+  App-->>User:
   Note over App,User: HTTP/1.1 200 OK<br/>Content-Type: text/event-stream<br/>X-SSE-Content-Type: application/json<br/>transfer-encoding: chunked
-  Sse Emitter-)User: message
-	deactivate App
+  Sse emitter-)User: broadcast message
+  deactivate App
+  deactivate Sse emitter
 ```
 
 # Documentation
