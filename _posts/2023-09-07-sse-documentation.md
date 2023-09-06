@@ -571,6 +571,5 @@ It's up to you to choose which specification to use, but looks like it's better 
 
 # References
 - [Server-sent events](https://html.spec.whatwg.org/multipage/server-sent-events.html)
-- [Quarkus](https://quarkus.io/)
 - [AsyncAPI](https://www.asyncapi.com/)
 - [OpenAPI](https://www.openapis.org/)
