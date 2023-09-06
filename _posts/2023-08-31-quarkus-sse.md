@@ -100,7 +100,7 @@ Just basic declaration, nothing special at all
 
 ```json
 {
-  "openapi": "3.1.0",
+  "openapi": "3.0.3",
   "info": {
     "version": "1.0.0",
     "title": "Messages API",
@@ -174,6 +174,20 @@ We can use this [GitHub issue](https://github.com/OAI/OpenAPI-Specification/issu
         "responses": {
           "200": {
             "description": "Stream of messages",
+            "headers": {
+              "X-SSE-Content-Type": {
+                "schema": {
+                  "type": "string",
+                  "enum": ["application/json"]
+                }
+              },
+              "transfer-encoding": {
+                "schema": {
+                  "type": "string",
+                  "enum": ["chunked"]
+                }
+              }
+            },
             "content": {
               "text/event-stream": {
                 "schema": {
@@ -227,6 +241,20 @@ We can use this [GitHub issue](https://github.com/OAI/OpenAPI-Specification/issu
         "responses": {
           "200": {
             "description": "Stream of messages",
+            "headers": {
+              "X-SSE-Content-Type": {
+                "schema": {
+                  "type": "string",
+                  "enum": ["application/json"]
+                }
+              },
+              "transfer-encoding": {
+                "schema": {
+                  "type": "string",
+                  "enum": ["chunked"]
+                }
+              }
+            },
             "content": {
               "text/event-stream": {
                 "schema": {
