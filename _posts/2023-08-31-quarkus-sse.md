@@ -1,9 +1,9 @@
 ---
-title: Quarkus SSE app
-date: 2023-08-31 20:00:00 +0400
+title: SSE documentation
+date: 2023-09-07 03:55:00 +0400
 author: pakisan
-categories: [Quarkus, SSE]
-tags: [quarkus, sse]
+categories: [Specifications]
+tags: [asyncapi, openapi, sse]
 mermaid: true
 ---
 
