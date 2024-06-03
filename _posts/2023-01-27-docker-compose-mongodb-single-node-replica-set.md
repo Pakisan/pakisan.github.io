@@ -1,5 +1,5 @@
 ---
-title: Docker compose MongoDB single node replica set
+title: MongoDB single node replica with Docker Compose
 date: 2023-01-27 16:10:00 +0400
 author: pakisan
 categories: [MongoDB, Replica set]
@@ -24,7 +24,7 @@ graph LR
 ```
 
 ### Create docker compose file
-```
+```yaml
 version: "3.9"
 networks:
   mongodb-network:

@@ -1,5 +1,5 @@
 ---
-title: Spring Boot 3 MongoDB transactions
+title: MongoDB transactions with Spring Boot 3
 date: 2023-01-29 22:12:00 +0400
 author: pakisan
 categories: [Spring Boot, MongoDB]

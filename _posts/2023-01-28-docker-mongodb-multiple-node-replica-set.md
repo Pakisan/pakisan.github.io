@@ -1,5 +1,5 @@
 ---
-title: Docker MongoDB multiple node replica set
+title: MongoDB multiple node replica set with Docker
 date: 2023-01-28 13:15:00 +0400
 author: pakisan
 categories: [MongoDB, Replica set]

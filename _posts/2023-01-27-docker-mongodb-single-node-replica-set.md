@@ -1,5 +1,5 @@
 ---
-title: Docker MongoDB single node replica set
+title: MongoDB single node replica set with Docker
 date: 2023-01-27 16:00:00 +0400
 author: pakisan
 categories: [MongoDB, Replica set]

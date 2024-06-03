@@ -1,5 +1,5 @@
 ---
-title: SSE documentation
+title: Comparing OpenAPI and AsyncAPI specifications for describing Server-Sent Events
 date: 2023-09-07 03:55:00 +0400
 author: pakisan
 categories: [Specifications]
