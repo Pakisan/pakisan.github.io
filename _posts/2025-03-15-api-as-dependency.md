@@ -5,243 +5,192 @@ date: 2025-03-13 10:36:44 +0400
 author: pakisan
 categories: [Specifications, API]
 tags: [asyncapi, openapi]
+mermaid: true
 ---
 
-## Introduction
+## Intro
 
-Like any developer, I have worked with APIs for a long time. I had a standard set of tools that was enough for me:
-- OpenAPI specification for documenting asynchronous APIs and their asynchronous callbacks, long before they appeared in version 3.0
-- Postman Collections to share API calls with colleagues inside and outside my team
-- Swagger UI for visual representation of the API
+For a long time, I couldn't finalize the draft of this note to publish it. I would sit down, sketch diagrams,
+write introductions like: "I've been working with APIs for a long time; it all started back then, evolved this way, and now I'm here, talking about APIs as dependencies that need proper maintenance."
 
-Everything changed when I joined a private bank in 2019. Initially, I was responsible for developing a chat system for individual and corporate clients,
-and later for the premium segment and investors. This introduced a new combination of WebSocket, SSE, and REST API. At that moment, my usual set of tools stopped working
+I tried to formulate justifications for a simple idea — API is a product with its own lifecycle — and now it's time to try a new format
 
-That’s how I discovered AsyncAPI. I started implementing it in the chat system and gradually developed a library for generating AsyncAPI documentation through Java code, 
-along with a JetBrains IDE plugin. Over four and a half years of working with AsyncAPI, I completely re-evaluated my approach to APIs and started perceiving them in a completely different way
+In this note, I want to gather feedback, refine it, and create a prototype
 
-Companies changed, but the same fundamental problems remained:
-- Debates over code-first vs. API-first approaches
-- Documentation being stored in various places, from Confluence Wiki to API portals
+## Motivation
 
-But rarely did people think of APIs as a product. That’s why, before moving on to the main idea, I want to emphasize this statement.
+There are plenty of services where I can store my API, publish documentation, create portals, and so on. But I don’t have a clear understanding of how to work with APIs
 
-### Statements
+I primarily code in Java, so before I start writing anything, I open GitHub and Maven Central to find the right packages to work with. If I'm using Spring or Quarkus, I can even request a skeleton of the future service — for example, via https://code.quarkus.io
 
-#### API is a reason why we are writing services
+Next, I launch my IDE, import the project, and easily track all dependency changes declared in `pom.xml`, for example
 
-A service, by itself, is not needed by anyone
+But when it comes to API integration, things get really messy:
 
-It implements the concept of a provided service, which is defined through an API contract
+First, I need to find the API. If it's in OpenAPI or AsyncAPI format, that's great — I can download it and generate clients (even better if there’s a dependency available, which I still need to match correctly with the API version).
 
-The specific specification used — OpenAPI, AsyncAPI, RAML, etc. — does not matter
+If there are no clients/DTOs/other artifacts, I have to generate everything manually or use an agent, hoping the contract was written correctly and everything works on the first try
 
-#### API is a product
-
-If an API is the reason a service exists, then API itself is a full-fledged product with its own lifecycle
-
-Users don’t care about our service’s architecture or technology stack
-
-It doesn’t matter whether the user is internal or external—what matters to them is:
-- How fast our API responds at p50, p90
-- What its SLA is
-- How many requests it can handle at once
-- How much of their required functionality it can cover
-
-For me, the last point is the most important. At its core, API is about functional abstraction — something that can be 
-reused when developing a new service, reducing development costs
-
-After all, [developing an API is expensive](https://apievangelist.com/2024/11/27/how-much-does-it-cost-to-develop-an-api/)
-
-## API as a full-fledged dependency
-
-An API is a dependency that I bring into my project to integrate with a particular system. And I want to work with it like any other dependency:
-- Know where to find it:
-  - NPM
-  - Maven Central
-  - PyPi
-  - RubyGems
-  - etc
-- Receive notifications about new versions, vulnerabilities, and their end-of-life (EOL)
-- Know where to look to understand what the service consists of
-
-How can we achieve this?
-
-### API discoverability
-
-A single standard for accessing an API catalog—api-catalog—could work
-
-To organize it effectively, it's important to be aware of one specification and one RFC
-
-#### RFC - api-catalog: a well-known URI and link relation to help discovery of APIs
-
-This [RFC: HTTP API Catalog](https://datatracker.ietf.org/doc/draft-ietf-httpapi-api-catalog/08/) was written by Kevin Smith
-
-It proposes introducing a new [Well-Known](https://en.wikipedia.org/wiki/Well-known_URI) URL to retrieve the API catalog: `/.well-known/api-catalog`
-
-```shell
-curl -i --location 'https://www.example.com/.well-known/api-catalog'
-HTTP/1.1 200
-Content-Type: application/linkset+json
-
-{
-  "linkset": [
-    {
-      "anchor": "https://www.example.com/.well-known/api-catalog",
-      "item": [
-        {
-          "href": "https://developer.example.com/apis/foo_api"
-        },
-        {
-          "href": "https://developer.example.com/apis/bar_api"
-        },
-        {
-          "href": "https://developer.example.com/apis/cantona_api"
-        }
-      ],
-      "api-catalog": "https://www.example.net/.well-known/api-catalog"
-    }
-  ]
-}
-```
-
-This approach will be familiar to those who have worked with [OpenID Connect(OIDC)](https://openid.net) since it uses a similar method for discovering configurations — `/.well-known/openid-configuration` — as described in [RFC: OpenID Connect Discovery 1.0](https://openid.net/specs/openid-connect-discovery-1_0.html)
-
-#### APIs.json Specification
-
-This [specification](https://apisjson.org) was written by [Kin Lane](https://www.linkedin.com/in/kinlane/). It proposes the following approach:
-
-We have a URL — `/apis.json` — where we can retrieve all the necessary information about an API:
-- Documentation
-- Terms of use
-- Contracts
-- Owners
+This problem isn’t new — otherwise, we wouldn’t have so many package repositories:
+- NPM
+- Maven Central
 - etc.
 
-```shell
-curl -i --location 'https://www.example.com/apis.json'
-HTTP/1.1 200
-Content-Type: application/json
+In my mind, a simple concept has formed: API + artifacts = API Repository — which any vendor could implement
 
-{
-  "aid": "apis.json",
-  "name": "Example API",
-  "type": "Index",
-  "description": "This is an example APIs.json file, demonstrating what is possible with the API discovery specification.",
-  "image": "https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg",
-  "tags": [
-    "Application Programming Interface",
-    "API"
-  ],
-  "created": "2024-11-06",
-  "modified": "2024-11-06",
-  "url": "https://example.com/apis.json",
-  "specificationVersion": "0.19",
-  "apis": [
-    {
-      "aid": "apis.json:example-api",
-      "name": "Example API",
-      "description": "This provides details about a specific API, telling what is possible.",
-      "image": "https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg",
-      "humanURL": "http://example.com",
-      "baseURL": "http://api.example.com",
-      "tags": [
-        "API",
-        "Application Programming Interface"
-      ],
-      "properties": [
-        {
-          "type": "Documentation",
-          "url": "https://example.com/documentation"
-        },
-        {
-          "type": "OpenAPI",
-          "url": "https://example.com/openapi.yml"
-        },
-        {
-          "type": "AsyncAPI",
-          "url": "https://example.com/asyncapi.yml"
-        }
-      ],
-      "overlays": [
-        {
-          "type": "APIs.io Search",
-          "url": "https://example.com/apis-io-search"
-        },
-        {
-          "type": "API Evangelist Rating",
-          "url": "http://example.com/api-evangelist-ratings"
-        }
-      ],
-      "contact": [
-        {
-          "FN": "APIs.json",
-          "email": "info@apisjson.org"
-        }
-      ]
-    }
-  ],
-  "maintainers": [
-    {
-      "FN": "Kin Lane",
-      "X-twitter": "apievangelist",
-      "email": "info@apievangelist.com"
-    }
-  ]
-}
+## API Repository
+
+An important clarification — the goal of an API Repository is not to replace existing API inventory solutions, of which there are plenty:
+- https://www.eventcatalog.dev/
+- https://bump.sh/
+- https://www.postman.com/
+- Own Git repo
+- etc.
+
+But rather to act as a glue—a standard that connects an API with its corresponding packages.
+
+To achieve this, only two dependencies are needed:
+1. A URL to the API contract
+2. Package coordinates in various repositories
+
+### API Lifecycle
+
+I don’t want to overcomplicate things, so I propose a familiar lifecycle
+
+```mermaid
+stateDiagram-v2
+  direction LR
+  [*] --> DRAFT
+  DRAFT --> RC
+  RC --> RELEASE
+  RELEASE --> EOL
+  EOL --> DEPRECATED
+  DEPRECATED --> [*]
 ```
 
-This approach can be compared to the [Sitemaps Protocol](https://www.sitemaps.org/protocol.html). We have enough information to index the entire APIs
+States:
+- `Draft` – A draft version of the API that is still evolving.
+- `RC` (Release Candidate) – The API structure is stable, with only minor changes expected.
+- `Release` – The API is officially released and will not change.
+- `EOL` (End of Life) – The API will soon be retired, and its use is not recommended.
+- `Deprecated` – The API has been fully decommissioned and can no longer be used.
 
----
+Restrictions Based on Lifecycle:
+- `Draft`, `RC` APIs are available for:
+  - Reading
+  - Writing
+- `Release`, `EOL`, `Deprecated` APIs are available for:
+  - Reading only
 
-Regardless of how our API is stored, we have a way to retrieve a catalog for further work:
-- https://www.example.com/.well-known/api-catalog
-- https://github.com/example-org/api/.well-known/api-catalog
-- https://www.example.com/apis.json
-- https://github.com/example-org/api/apis.json
+Now it's clearer which phase the API is in and when it will be decommissioned
 
-Now that we understand how to organize API discoverability, we can move forward
+### API Repository structure
 
-### Getting it all together
+#### Storing APIs
 
-> All commands, their parameters, file structures, and APIs are for informational purposes only and will change during development
-{:.prompt-warning}
+An API can be stored anywhere, so focusing on its storage isn't necessary. Instead, it's enough to define a structure that includes:
+- The API contract
+- The current lifecycle phase
+- The availability of artifacts in package managers
 
-#### Storing Dependencies in the Project
+##### How It Works in Practice
 
-> Yes, I know the name is similar to `package.json` and overlaps with `apis.json` from the specification above, but I haven't come up with a better name yet 😬
-{:.prompt-info}
+As the API contract is finalized, we generate a URN and register it in the repository
 
-```shell
-➜ git:(main) ✗ ls -p | grep -v /
-api.yaml
+```yaml
+urn: com.myCompanyName:asyncapi:chat-api-gateway:2.34.0
+cycle: Draft
+contract:
+  $ref: 'https://api-hub.com/apis/asyncapi/5a0052fd-fd49-4eb1-a257-1f246906a0da'
+```
+{:file='API'}
+
+Next, if possible, we generate the necessary packages from the contract and publish them in repositories
+
+```yaml
+urn: com.myCompanyName:asyncapi:chat-api-gateway:2.34.0
+cycle: Release
+contract:
+  $ref: 'https://api-hub.com/apis/asyncapi/5a0052fd-fd49-4eb1-a257-1f246906a0da'
+artifacts:
+  maven:
+    - language: java
+      framework: any # spring-boot | quarkus | micronaut
+      dependency: # com.github.myCompanyName:chat-api-gateway:2.34.0
+        groupId: com.myCompanyName
+        artifactId: chat-api-gateway
+        version: 2.34.0
+  npm:
+    - language: type-script
+      dependency: # "@myCompanyName/chat-api-gateway": "2.34.0"
+        groupId: myCompanyName
+        artifactId: chat-api-gateway
+        version: 2.34.0
+```
+{:file='API'}
+
+When the API is ready for an update or deprecation, we move it to `EOL`, indicating when this will happen and what alternatives are available
+
+```yaml
+urn: com.myCompanyName:asyncapi:chat-api-gateway:2.34.0
+cycle: EOL
+deprecationNotice:
+  note: Current version of API will be deprecated at 2025-09-26
+  eliminationDate: 2025-09-26
+  successor:
+    urn: com.myCompanyName:asyncapi:chat-api-gateway:3.0.0
+contract:
+  $ref: 'https://api-hub.com/apis/asyncapi/5a0052fd-fd49-4eb1-a257-1f246906a0da'
+artifacts:
+  maven:
+    - language: java
+      framework: any # spring-boot | quarkus | micronaut
+      dependency: # com.github.myCompanyName:chat-api-gateway:2.34.0
+        groupId: com.myCompanyName
+        artifactId: chat-api-gateway
+        version: 2.34.0
+  npm:
+    - language: type-script
+      dependency: # "@myCompanyName/chat-api-gateway": "2.34.0"
+        groupId: myCompanyName
+        artifactId: chat-api-gateway
+        version: 2.34.0
 ```
 
-At the root of the project, we will have an `api.yaml` file to store information about the APIs used and their sources. Its structure is based on the `<repositories></repositories>` block from [Maven pom.xml](https://maven.apache.org/guides/introduction/introduction-to-the-pom.html)
+Ultimately, we move it to the `Deprecated` lifecycle phase
 
-##### Manually Adding Dependencies
+#### Working with APIs
 
-First, let's create a file
+There is a place to fetch the API from, so it's time to figure out how to do that
+
+It will all start with `api.yaml` at the root of the project, which we will create
 
 ```shell
 touch api.yaml
 ```
 
-Now, let's add a list of API catalogs where we will search for APIs
+In the manifest, we will list the repositories we need and the parameters for searching and building the API packages
 
 ```yaml
-api-catalogs:
+repositories:
   - id: central
-    url: https://saas-api-hub.com/.well-known/api-catalog
-  - id: myCompanyName_chat-ai
-    url: https://github.com/myCompanyName/ai-apis/tree/main/.well-known/api-catalog
-  - id: myCompanyName_chat
-    url: https://github.com/myCompanyName/chat-apis/tree/main/.well-known/api-catalog
+    url: https://www.eventcatalog.dev/.well-known/api-repository
+  - id: myCompanyName_repo_1
+    url: https://github.com/myCompanyName/ai-apis/tree/main/.well-known/api-repository
+  - id: myCompanyName_repo_2
+    url: https://github.com/myCompanyName/chat-apis/tree/main/.well-known/api-repository
+
+build:
+  jvm:
+    language: java
+    framework: quarkus
+    build-tool: maven
+    build-file-path: ./pom.xml
+  dependencies-have-priority: true
 ```
 {:file='api.yaml'}
 
-Once the catalogs are listed, we can specify the APIs we are using
+Once the repositories are listed, we can specify the APIs we are using
 
 ```yaml
 apis:
@@ -266,55 +215,9 @@ apis:
 ```
 {:file='api.yaml'}
 
-Now that we have listed the required APIs, we can verify the correctness of the dependencies
+Once the manifest is ready, you can work with it via the CLI
 
-```shell
-➜ git:(main) ✗ cat api.yaml
-api-catalogs:
-  - id: central
-    url: https://saas-api-hub.com/.well-known/api-catalog
-  - id: myCompanyName_chat-ai
-    url: https://github.com/myCompanyName/ai-apis/tree/main/.well-known/api-catalog
-  - id: myCompanyName_chat
-    url: https://github.com/myCompanyName/chat-apis/tree/main/.well-known/api-catalog
-
-apis:
-  - groupId: com.github.myCompanyName
-    type: asyncapi
-    apiId: chat-api-gateway
-    version: 2.34.0
-  - groupId: com.github.myCompanyName
-    type: openapi
-    apiId: chat-api-ai-assistant
-    version: 1.3.0
-    operationIds:
-      - aiGenerateChatBlock
-      - aiGetChatBlockSchemas
-```
-{:file='api.yaml'}
-
-##### Adding Dependencies via CLI
-
-First, let's initialize the project
-
-```shell
-➜ git:(main) ✗ apim init
-```
-
-Here, we will add the entire API
-
-```shell
-➜ git:(main) ✗ apim install com.github.myCompanyName:asyncapi:chat-api-gateway:2.34.0
-```
-
-And here, we will list only the necessary operations
-
-```shell
-➜ git:(main) ✗ apim install com.github.myCompanyName:openapi:chat-api-ai-assistant:1.3.0:aiGenerateChatBlock
-➜ git:(main) ✗ apim install com.github.myCompanyName:openapi:chat-api-ai-assistant:1.3.0:aiGetChatBlockSchemas
-```
-
-Now, let's check our dependencies
+Reviewing dependencies
 
 ```shell
 ➜ git:(main) ✗ apim ls
@@ -325,80 +228,53 @@ demo-project@1.6.0 /Users/pavelbodyachevskiy/IdeaProjects/demo-project
 │ ├── aiGetChatBlockSchemas
 ```
 
-#### Working with Dependencies in the Project
-
-У нас есть `api.yaml`, в котором перечислены интересующие API. А это значит, пришло время выжать из них по максимуму
-
-Наша главная задача, переиспользовать указанные API, для сокращения времени, необходимого на разработку нового сервиса. В этом нам поможет генерация кода из API, для заявленных интеграций
-
-#### Генерация проекта с нуля
-
-Если проект новый, то у нас есть возможность сгенерировать проект с нуля
+Adding new API
 
 ```shell
-➜ git:(main) ✗ apim generate-jvm-project \
-  --groupId com.example \
-  --artifactId demo-project \
-  --version 1.6.0 \
-  --language java \
-  --framework spring-boot \
-  --build-tool maven \
-  --http-client feign \
-  --use-dependencies true
+➜ git:(main) ✗ apim install com.github.myCompanyName:asyncapi:notifications-api:1.73.25:subscribeForRejectedMessages
 ```
 
-После выполнения команды, получим скелет проекта
-
-```shell
-find . -type f
-./src/main/java/com.example/inegrations/com.github.myCompanyName/asyncapi/chat-api-gateway/v_2_34_0/СhatApiGatewayListener.java
-./src/main/java/Application.java
-./gitignore
-./api.yaml
-./pom.xml
-./README.md
-```
-
-Из-за отсутствия опубликованной зависимости в artifactory для `com.github.myCompanyName:asyncapi:chat-api-gateway:2.34.0`, был сгенерирован клиент внутри приложения
-
-В то время как для `com.github.myCompanyName:openapi:chat-api-ai-assistant` будет пере использована уже существующая зависимость
-
-```shell
-cat pom.xml
-<dependencies>
-    <!-- Chat API AI Assistant Client -->
-    <dependency>
-        <groupId>com.github.myCompanyName</groupId>
-        <artifactId>chat-api-ai-assistant-client</artifactId>
-        <version>1.3.0</version>
-    </dependency>
-</dependencies>
-```
-
-Теперь пришло время заглянуть в `api.yaml`
-
-```shell
-➜ git:(main) ✗ cat api.yaml
-build-info:
-  jvm:
-    language: java
-    framework: spring-boot
-    build-tool: maven
-    build-file: ./pom.xml
-    http-client: feign
-  dependencies-has-priority: true
-```
-{:file='api.yaml'}
-
-Появился новый блок `build-info`, который будет использоваться для:
-- Генерации кода, если API не предоставляет готового клиента
-- Поиска сборочного файла, для добавления или обновления зависимостей
-
-Теперь, когда есть информация о необходимой реализации, можно собирать проект
+Building project
 
 ```shell
 ➜ git:(main) ✗ apim build
 ```
 
-#### Работа с существующим проектом
+During the build process, we go to the API Repository and check the lifecycle phase of the API and whether it has the appropriate packages. 
+In the case of `Draft`, `RC`, `EOL`, or `Deprecated`, we display a warning while continuing the project build
 
+If the API has packages, we add the dependency
+
+```xml
+<dependencies>
+    <!-- Chat API AI Assistant Client -->
+    <dependency>
+        <groupId>com.github.myCompanyName</groupId>
+        <artifactId>chat-api-gateway</artifactId>
+        <version>2.34.0</version>
+    </dependency>
+</dependencies>
+```
+
+If that's not possible, we generate the necessary package locally
+
+```shell
+find . -type f
+./generated/src/main/java/com.example/inegrations/com.github.myCompanyName/asyncapi/notifications-api/v_1_73_25/RejectedMessagesListener.java
+./src/main/java/Application.java
+./api.yaml
+./pom.xml
+```
+
+## Conclusion
+
+In this note, I want to show that the introduction of a small standard can make working with APIs easier
+
+There’s a repository you can refer to. It will tell you which APIs are current, which are not, and whether they have official packages that can be reused.
+
+By writing an IDE extension:
+- I can retrieve information in the background about APIs that are going to be deprecated, and update them in time
+- Implement autocomplete and documentation display for used APIs
+- Pass the necessary information to the agent via MCP for code generation or to find the required API
+
+What do you think?
