@@ -1,6 +1,6 @@
 ---
 title: Interpreting API as a full-fledged dependency
-description: TODO
+description: How not to hate the API you're working with
 date: 2025-03-13 10:36:44 +0400
 author: pakisan
 categories: [Specifications, API]
