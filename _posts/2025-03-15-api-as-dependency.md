@@ -6,6 +6,8 @@ author: pakisan
 categories: [Specifications, API]
 tags: [asyncapi, openapi]
 mermaid: true
+image:
+  path: /assets/assets/img/2025-03-15-api-as-dependency/cover image.png
 ---
 
 ## Intro
