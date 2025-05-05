@@ -10,6 +10,9 @@ image:
   path: /assets/assets/img/2025-03-15-api-as-dependency/cover image.png
 ---
 
+> Here is Kin Lane' response https://apievangelist.com/2025/04/03/api-repository-proposal/
+{: .prompt-tip }
+
 ## Intro
 
 For a long time, I couldn't finalize the draft of this note to publish it. I would sit down, sketch diagrams,
