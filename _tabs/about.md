@@ -4,10 +4,36 @@ icon: fas fa-info-circle
 order: 4
 ---
 
-Well crafted software engineer with 10 years of experience. I have solid experience in development for enterprise, non-profit organizations, charity organizations, startups and open source projects
+Experienced and detail-oriented **Software Engineer** with **10+ years** of hands-on expertise in **enterprise**, **nonprofit**, **startup**, 
+and **open-source software development**. Proven track record of delivering scalable backend systems, API-first applications, 
+and developer tooling. Strong focus on **API management**, **event-driven architecture (EDA)**, and **DevEx** (developer experience).
 
-Passionate about API management, Event Driven Architecture, OSS development, DevEx and product development in different areas
+Passionate about building tools that improve productivity and interoperability in modern software ecosystems. Actively contributing to 
+the **[AsyncAPI Initiative](https://www.asyncapi.com)**, enhancing Java support and integrating specifications with popular frameworks like [Spring Boot](https://spring.io/projects/spring-boot) and [Quarkus](https://quarkus.io/).
 
-In previous roles I launched auctions of rewards, and Crowdfunding School for biggest social crowdfunding platform - Planeta.ru and led chat development for biggest private bank
+---
 
-Now I'm helping to AsyncAPI Initiative develop tools for Java and adapt our specification in various tools and frameworks, like Spring and Quarkus
+🚀 Key Achievements:
+- **Led development** of a real-time chat system for the **largest private bank** in the CIS region.
+- Launched **"Crowdfunding School"** and **auctions of rewards** for [Planeta.ru](https://planeta.ru), the leading social crowdfunding platform.
+- Designed and shipped developer tools and libraries supporting AsyncAPI specification for Java, with a focus on adoption in real-world microservice systems.
+- Consistent contributor to open-source projects in API tooling, DevEx, and backend services
+
+---
+
+🛠️ **Technical Skills:**
+
+**Languages & Frameworks:** </br>
+Java, Spring Boot, Quarkus, JavaScript, Python, Dart, Vue.js, Flutter, JavaFX
+
+**API & Architecture:** </br>
+AsyncAPI, OpenAPI, REST, WebSockets, SSE, Event-Driven Architecture, API Management
+
+**DevOps & Infrastructure:** </br>
+AWS, GCP, Kubernetes, Mesos, Marathon, Nginx
+
+**Databases:** </br>
+MongoDB, PostgreSQL
+
+**Other Competencies:** </br>
+Developer Experience (DevEx), OSS Development, Technical Product Management, API Lifecycle, CI/CD
