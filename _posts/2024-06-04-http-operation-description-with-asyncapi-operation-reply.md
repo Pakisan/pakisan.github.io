@@ -4,6 +4,8 @@ date: 2024-06-04 02:00:00 +0400
 author: pakisan
 categories: [Specifications, AsyncAPI]
 tags: [asyncapi, http]
+image:
+  path: /assets/assets/img/2024-06-04-http-operation-description-with-asyncapi-operation-reply/cover image.png
 ---
 
 Few weeks ago I saw interesting question in our Slack.
