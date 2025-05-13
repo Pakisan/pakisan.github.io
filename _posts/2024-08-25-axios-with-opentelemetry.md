@@ -5,6 +5,8 @@ date: 2024-08-25 15:06:00 +0400
 author: pakisan
 categories: [OpenTelemetry, Axios]
 tags: [openapi, http, axios]
+image:
+  path: /assets/assets/img/2024-08-25-axios-with-opentelemetry/cover image.png
 ---
 
 Right now I'm consulting folks, who are building new EdTech platform.
