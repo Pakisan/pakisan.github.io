@@ -5,6 +5,8 @@ author: pakisan
 categories: [Specifications]
 tags: [asyncapi, openapi, sse]
 mermaid: true
+image:
+  path: /assets/assets/img/2023-09-07-sse-documentation/cover image.png
 ---
 
 Let's assume that we have service which allows some users to send messages and others to receive them.
