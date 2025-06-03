@@ -23,17 +23,17 @@ the **[AsyncAPI Initiative](https://www.asyncapi.com)**, enhancing Java support 
 
 🛠️ **Technical Skills:**
 
-**Languages & Frameworks:** </br>
+**Languages & Frameworks:**
 Java, Spring Boot, Quarkus, JavaScript, Python, Dart, Vue.js, Flutter, JavaFX
 
-**API & Architecture:** </br>
+**API & Architecture:**
 AsyncAPI, OpenAPI, REST, WebSockets, SSE, Event-Driven Architecture, API Management
 
-**DevOps & Infrastructure:** </br>
+**DevOps & Infrastructure:**
 AWS, GCP, Kubernetes, Mesos, Marathon, Nginx
 
-**Databases:** </br>
+**Databases:**
 MongoDB, PostgreSQL
 
-**Other Competencies:** </br>
+**Other Competencies:**
 Developer Experience (DevEx), OSS Development, Technical Product Management, API Lifecycle, CI/CD
