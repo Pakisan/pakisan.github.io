@@ -9,7 +9,7 @@ image:
   path: /assets/assets/img/asyncapi-plugin-for-jetbrains-ide.png
 ---
 
-Today I want to start sharing more about how my [AsyncAPI Specification](http://asyncapi.com) plugin for JetBrains IDEs works under the hood. The goal is to pass along some of the knowledge I’ve gathered and hopefully inspire or help others in the community build awesome plugins
+Today I want to start sharing more about how my [AsyncAPI Specification](https://asyncapi.com) plugin for JetBrains IDEs works under the hood. The goal is to pass along some of the knowledge I’ve gathered and hopefully inspire or help others in the community build awesome plugins
 
 **Topic of the Day:** Reference Contributors and Auto-Completion
 
