@@ -1,10 +1,33 @@
 ---
-title: MongoDB transactions with Spring Boot 3
+title: MongoDB transactions with Spring Boot 3 | Complete Guide
 date: 2023-01-29 22:12:00 +0400
 author: pakisan
 categories: [Spring Boot, MongoDB]
 tags: [transactions, mongodb]
 mermaid: true
+description: Learn how to implement MongoDB transactions in Spring Boot 3 applications. This guide covers setting up replica sets, configuring MongoTransactionManager, and fixing common issues with @DataMongoTest
+head:
+  - - meta
+    - name: keywords
+      content: mongodb transactions, spring boot 3, replica set, mongotransactionmanager, platformtransactionmanager, datamongotest, spring data mongodb
+  - - meta
+    - property: og:title
+      content: MongoDB transactions with Spring Boot 3 | Complete Guide
+  - - meta
+    - property: og:description
+      content: Learn how to implement MongoDB transactions in Spring Boot 3 applications. This guide covers setting up replica sets, configuring MongoTransactionManager, and fixing common issues with @DataMongoTest
+  - - meta
+    - property: og:type
+      content: article
+  - - meta
+    - property: og:url
+      content: https://pavelon.dev/posts/spring-boot3_mongodb_transactions/
+  - - meta
+    - name: twitter:title
+      content: MongoDB transactions with Spring Boot 3 | Complete Guide
+  - - meta
+    - name: twitter:description
+      content: Learn how to implement MongoDB transactions in Spring Boot 3 applications. This guide covers setting up replica sets, configuring MongoTransactionManager, and fixing common issues with @DataMongoTest
 ---
 
 Transactions won't work without next things:
@@ -92,7 +115,7 @@ References:
 - [Closed issue on GitHub](https://github.com/spring-projects/spring-boot/issues/20182)
 
 Proposal to import `TransactionAutoConfiguration` didn't help me
-```java
+```
 @ImportAutoConfiguration(TransactionAutoConfiguration.class)
 ```
 
