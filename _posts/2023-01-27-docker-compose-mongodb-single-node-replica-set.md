@@ -1,10 +1,33 @@
 ---
-title: MongoDB single node replica with Docker Compose
+title: MongoDB single node replica with Docker Compose | Step-by-Step Tutorial
 date: 2023-01-27 16:10:00 +0400
 author: pakisan
 categories: [MongoDB, Replica set]
 tags: [transactions, mongodb, docker, docker compose]
 mermaid: true
+description: Learn how to set up a MongoDB single node replica set using Docker Compose with this step-by-step tutorial. Perfect for development environments and testing MongoDB transactions
+head:
+  - - meta
+    - name: keywords
+      content: mongodb replica set, docker compose mongodb, single node replica set, mongodb transactions, docker mongodb setup, mongodb cluster, mongodb replication
+  - - meta
+    - property: og:title
+      content: MongoDB single node replica with Docker Compose | Step-by-Step Tutorial
+  - - meta
+    - property: og:description
+      content: Learn how to set up a MongoDB single node replica set using Docker Compose with this step-by-step tutorial. Perfect for development environments and testing MongoDB transactions
+  - - meta
+    - property: og:type
+      content: article
+  - - meta
+    - property: og:url
+      content: https://pavelon.dev/posts/docker-compose-mongodb-single-node-replica-set/
+  - - meta
+    - name: twitter:title
+      content: MongoDB single node replica with Docker Compose | Step-by-Step Tutorial
+  - - meta
+    - name: twitter:description
+      content: Learn how to set up a MongoDB single node replica set using Docker Compose with this step-by-step tutorial. Perfect for development environments and testing MongoDB transactions
 ---
 
 ## Instructions
