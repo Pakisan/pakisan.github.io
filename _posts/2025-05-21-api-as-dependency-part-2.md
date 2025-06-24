@@ -1,11 +1,33 @@
 ---
-title: Package URL for storing API artifacts
-description: Unifying the storage of required packages for APIs
+title: Package URL for storing API artifacts | Simplified Dependency Management
+description: Learn how Package URL (PURL) standardizes and simplifies API dependency management across different ecosystems. This guide shows how to reduce manifest size and improve readability in API repositories
 date: 2025-05-21 01:36:44 +0400
 author: pakisan
 categories: [Specifications, API]
 tags: [asyncapi, openapi]
 mermaid: true
+head:
+  - - meta
+    - name: keywords
+      content: package url, purl, api artifacts, api dependency management, api repository, standardized package references, maven dependencies, npm dependencies, api manifest, dependency standardization
+  - - meta
+    - property: og:title
+      content: Package URL for storing API artifacts | Simplified Dependency Management
+  - - meta
+    - property: og:description
+      content: Learn how Package URL (PURL) standardizes and simplifies API dependency management across different ecosystems. This guide shows how to reduce manifest size and improve readability in API repositories
+  - - meta
+    - property: og:type
+      content: article
+  - - meta
+    - property: og:url
+      content: https://pavelon.dev/posts/api-as-dependency-part-2/
+  - - meta
+    - name: twitter:title
+      content: Package URL for storing API artifacts | Simplified Dependency Management
+  - - meta
+    - name: twitter:description
+      content: Learn how Package URL (PURL) standardizes and simplifies API dependency management across different ecosystems. This guide shows how to reduce manifest size and improve readability in API repositories
 image:
   path: /assets/assets/img/2025-03-15-api-as-dependency/cover image.png
 ---
