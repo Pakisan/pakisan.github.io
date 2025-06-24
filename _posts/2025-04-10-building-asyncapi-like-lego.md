@@ -1,10 +1,32 @@
 ---
-title: Building AsyncAPI contracts like lego
-description: How to split API to components and don't loose auto-completion and validation?
+title: Building AsyncAPI contracts like lego | Modular API Design
+description: Learn how to split AsyncAPI contracts into reusable components while maintaining auto-completion and validation capabilities. This guide introduces the x-component extension for modular API design
 date: 2025-04-11 20:28:44 +0400
 author: pakisan
 categories: [Specifications, API]
 tags: [asyncapi, openapi]
+head:
+  - - meta
+    - name: keywords
+      content: asyncapi components, modular api design, api reusability, openapi components, x-component extension, api contract validation, component extraction, api standardization
+  - - meta
+    - property: og:title
+      content: Building AsyncAPI contracts like lego | Modular API Design
+  - - meta
+    - property: og:description
+      content: Learn how to split AsyncAPI contracts into reusable components while maintaining auto-completion and validation capabilities. This guide introduces the x-component extension for modular API design
+  - - meta
+    - property: og:type
+      content: article
+  - - meta
+    - property: og:url
+      content: https://pavelon.dev/posts/building-asyncapi-like-lego/
+  - - meta
+    - name: twitter:title
+      content: Building AsyncAPI contracts like lego | Modular API Design
+  - - meta
+    - name: twitter:description
+      content: Learn how to split AsyncAPI contracts into reusable components while maintaining auto-completion and validation capabilities. This guide introduces the x-component extension for modular API design
 image:
   path: /assets/assets/img/2025-04-10-building-asyncapi-like-lego/cover image.png
 ---
