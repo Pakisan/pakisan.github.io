@@ -5,6 +5,29 @@ author: pakisan
 categories: [Specifications]
 tags: [asyncapi, openapi, sse]
 mermaid: true
+description: A detailed comparison of OpenAPI and AsyncAPI specifications for documenting Server-Sent Events (SSE). Learn the pros and cons of each approach with practical examples
+head:
+  - - meta
+    - name: keywords
+      content: server-sent events, sse, openapi specification, asyncapi specification, api documentation, event-driven architecture, http streaming, real-time communication
+  - - meta
+    - property: og:title
+      content: Comparing OpenAPI and AsyncAPI specifications for describing Server-Sent Events
+  - - meta
+    - property: og:description
+      content: A detailed comparison of OpenAPI and AsyncAPI specifications for documenting Server-Sent Events (SSE). Learn the pros and cons of each approach with practical examples
+  - - meta
+    - property: og:type
+      content: article
+  - - meta
+    - property: og:url
+      content: https://pavelon.dev/posts/sse-documentation/
+  - - meta
+    - name: twitter:title
+      content: Comparing OpenAPI and AsyncAPI specifications for describing Server-Sent Events
+  - - meta
+    - name: twitter:description
+      content: A detailed comparison of OpenAPI and AsyncAPI specifications for documenting Server-Sent Events (SSE). Learn the pros and cons of each approach with practical examples
 image:
   path: /assets/assets/img/2023-09-07-sse-documentation/cover image.png
 ---
