@@ -1,10 +1,32 @@
 ---
-title: 'Behind the Scenes: Reference Completion in the AsyncAPI Plugin for JetBrains IDEs'
-description: How to test own implementation of reference contributor in IntelliJ SDK
+title: 'Behind the Scenes: Reference Completion in the AsyncAPI Plugin for JetBrains IDEs | Developer Guide'
+description: Learn how to implement and test custom reference contributors in IntelliJ SDK for enhanced code completion. This guide explores the AsyncAPI plugin's reference handling system with practical examples
 date: 2025-06-01 22:16:44 +0400
 author: pakisan
 categories: [Development, JetBrains IDEs]
 tags: [IntelliJ SDK]
+head:
+  - - meta
+    - name: keywords
+      content: intellij sdk, reference contributor, psi reference, code completion, jetbrains plugin development, asyncapi plugin, custom reference handling, intellij idea extension, json reference completion
+  - - meta
+    - property: og:title
+      content: 'Behind the Scenes: Reference Completion in the AsyncAPI Plugin for JetBrains IDEs | Developer Guide'
+  - - meta
+    - property: og:description
+      content: Learn how to implement and test custom reference contributors in IntelliJ SDK for enhanced code completion. This guide explores the AsyncAPI plugin's reference handling system with practical examples
+  - - meta
+    - property: og:type
+      content: article
+  - - meta
+    - property: og:url
+      content: https://pavelon.dev/posts/intellij-sdk-testing-custom-reference-contributor/
+  - - meta
+    - name: twitter:title
+      content: 'Behind the Scenes: Reference Completion in the AsyncAPI Plugin for JetBrains IDEs | Developer Guide'
+  - - meta
+    - name: twitter:description
+      content: Learn how to implement and test custom reference contributors in IntelliJ SDK for enhanced code completion. This guide explores the AsyncAPI plugin's reference handling system with practical examples
 image:
   path: /assets/assets/img/asyncapi-plugin-for-jetbrains-ide.png
 ---
@@ -38,7 +60,7 @@ To ensure everything works as expected, we write a test that extends JetBrains' 
 
 ```kotlin
 class JsonReferenceVariantsTest: BasePlatformTestCase() {
-  
+
 }
 ```
 
