@@ -1,10 +1,32 @@
 ---
-title: Axios with OpenTelemetry
-description: How to trace requests with Axios and OpenTelemetry
+title: Axios with OpenTelemetry | Complete Guide
+description: Learn how to implement distributed tracing for HTTP requests using Axios and OpenTelemetry. This guide covers setup, configuration, and practical examples for effective request monitoring
 date: 2024-08-25 15:06:00 +0400
 author: pakisan
 categories: [OpenTelemetry, Axios]
 tags: [openapi, http, axios]
+head:
+  - - meta
+    - name: keywords
+      content: axios opentelemetry, distributed tracing, request monitoring, javascript tracing, web tracing, opentelemetry javascript, axios interceptors, signoz, apm, span attributes, trace context
+  - - meta
+    - property: og:title
+      content: Axios with OpenTelemetry | Complete Guide
+  - - meta
+    - property: og:description
+      content: Learn how to implement distributed tracing for HTTP requests using Axios and OpenTelemetry. This guide covers setup, configuration, and practical examples for effective request monitoring
+  - - meta
+    - property: og:type
+      content: article
+  - - meta
+    - property: og:url
+      content: https://pavelon.dev/posts/axios-with-opentelemetry/
+  - - meta
+    - name: twitter:title
+      content: Axios with OpenTelemetry | Complete Guide
+  - - meta
+    - name: twitter:description
+      content: Learn how to implement distributed tracing for HTTP requests using Axios and OpenTelemetry. This guide covers setup, configuration, and practical examples for effective request monitoring
 image:
   path: /assets/assets/img/2024-08-25-axios-with-opentelemetry/cover image.png
 ---
