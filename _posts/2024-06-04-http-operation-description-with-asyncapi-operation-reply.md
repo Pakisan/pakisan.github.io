@@ -1,9 +1,32 @@
 ---
-title: Describing HTTP operation with AsyncAPI Operation Reply
+title: Describing HTTP operation with AsyncAPI Operation Reply | Practical Guide
 date: 2024-06-04 02:00:00 +0400
 author: pakisan
 categories: [Specifications, AsyncAPI]
 tags: [asyncapi, http]
+description: Learn how to describe HTTP operations using AsyncAPI v3 Operation Reply with practical examples. This guide shows how to implement Server-Sent Events (SSE) and HTTP messaging in AsyncAPI specifications
+head:
+  - - meta
+    - name: keywords
+      content: asyncapi v3, operation reply, http operations, server-sent events, sse, api specification, event-driven architecture, asyncapi http binding, message broadcasting
+  - - meta
+    - property: og:title
+      content: Describing HTTP operation with AsyncAPI Operation Reply | Practical Guide
+  - - meta
+    - property: og:description
+      content: Learn how to describe HTTP operations using AsyncAPI v3 Operation Reply with practical examples. This guide shows how to implement Server-Sent Events (SSE) and HTTP messaging in AsyncAPI specifications
+  - - meta
+    - property: og:type
+      content: article
+  - - meta
+    - property: og:url
+      content: https://pavelon.dev/posts/http-operation-description-with-asyncapi-operation-reply/
+  - - meta
+    - name: twitter:title
+      content: Describing HTTP operation with AsyncAPI Operation Reply | Practical Guide
+  - - meta
+    - name: twitter:description
+      content: Learn how to describe HTTP operations using AsyncAPI v3 Operation Reply with practical examples. This guide shows how to implement Server-Sent Events (SSE) and HTTP messaging in AsyncAPI specifications.
 image:
   path: /assets/assets/img/2024-06-04-http-operation-description-with-asyncapi-operation-reply/cover image.png
 ---
