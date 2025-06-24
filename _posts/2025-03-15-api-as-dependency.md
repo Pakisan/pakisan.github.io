@@ -1,11 +1,33 @@
 ---
-title: Interpreting API as a full-fledged dependency
-description: How not to hate the API you're working with
+title: Interpreting API as a full-fledged dependency | Standardization Proposal
+description: Learn how to treat APIs as proper dependencies with lifecycle management, versioning, and repository integration. This proposal introduces a standard for API repositories to simplify API consumption and maintenance
 date: 2025-03-13 10:36:44 +0400
 author: pakisan
 categories: [Specifications, API]
 tags: [asyncapi, openapi]
 mermaid: true
+head:
+  - - meta
+    - name: keywords
+      content: api as dependency, api repository, api lifecycle, api versioning, api management, api standardization, api contracts, api artifacts, api deprecation, api integration
+  - - meta
+    - property: og:title
+      content: Interpreting API as a full-fledged dependency | Standardization Proposal
+  - - meta
+    - property: og:description
+      content: Learn how to treat APIs as proper dependencies with lifecycle management, versioning, and repository integration. This proposal introduces a standard for API repositories to simplify API consumption and maintenance
+  - - meta
+    - property: og:type
+      content: article
+  - - meta
+    - property: og:url
+      content: https://pavelon.dev/posts/api-as-dependency/
+  - - meta
+    - name: twitter:title
+      content: Interpreting API as a full-fledged dependency | Standardization Proposal
+  - - meta
+    - name: twitter:description
+      content: Learn how to treat APIs as proper dependencies with lifecycle management, versioning, and repository integration. This proposal introduces a standard for API repositories to simplify API consumption and maintenance
 image:
   path: /assets/assets/img/2025-03-15-api-as-dependency/cover image.png
 ---
