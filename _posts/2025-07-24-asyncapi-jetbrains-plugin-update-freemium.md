@@ -11,7 +11,7 @@ head:
       content: asyncapi jetbrains plugin, spectral linter integration, jetbrains plugin freemium, asyncapi plugin features, jetbrains ides, asyncapi plugin update, spectral validation jetbrains, asyncapi plugin pricing
   - - link
     - rel: canonical
-      href: https://pavelon.dev/posts/2025-07-24-upcoming-jetbrains-plugin-release-1/
+      href: https://pavelon.dev/posts/asyncapi-jetbrains-plugin-update-freemium/
   - - meta
     - property: og:title
       content: 'AsyncAPI JetBrains Plugin: Freemium Model & Spectral Linter Update'
@@ -23,7 +23,7 @@ head:
       content: article
   - - meta
     - property: og:url
-      content: https://pavelon.dev/posts/2025-07-24-upcoming-jetbrains-plugin-release-1/
+      content: https://pavelon.dev/posts/asyncapi-jetbrains-plugin-update-freemium/
   - - meta
     - name: twitter:title
       content: 'AsyncAPI JetBrains Plugin: Freemium Model & Spectral Linter Update'
