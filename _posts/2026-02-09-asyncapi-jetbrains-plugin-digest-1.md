@@ -1,7 +1,7 @@
 ---
 title: 'AsyncAPI JetBrains Plugin: Digest #1 - Smarter UI & Better Kafka Support'
 description: First feature digest of the AsyncAPI JetBrains Plugin. Explore the new UI improvements, bidirectional editor, and enhanced AsyncAPI generation from Apache Kafka and Spring-based projects
-date: 2025-07-24 15:24:37 +0400
+date: 2026-02-09 16:24:37 +0400
 author: pakisan
 categories: [Development, JetBrains IDEs]
 tags: [JetBrains Plugin, AsyncAPI, Spring Boot, Apache Kafka]
