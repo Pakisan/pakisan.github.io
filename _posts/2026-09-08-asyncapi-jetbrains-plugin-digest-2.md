@@ -134,7 +134,7 @@ Creating, validating, completing, and previewing components is a licensed featur
 
 Project Overview is a licensed feature.
 
-![Remote References settings](/assets/assets/img/2026-09-08-asyncapi-jetbrains-plugin-digest-2/spring-messaging-overview.png){: width="972" height="589" }
+![Spring Messaging Overview](/assets/assets/img/2026-09-08-asyncapi-jetbrains-plugin-digest-2/spring-messaging-overview.png){: width="972" height="589" }
 
 ---
 
